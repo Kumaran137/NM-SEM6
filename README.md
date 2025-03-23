@@ -24,6 +24,6 @@ CustomerOrder-Application is a RESTful API built with **Spring Boot**, designed 
 
 1️⃣ **Clone the repository**  
 ```sh
-git clone https://github.com/YOUR_GITHUB_USERNAME/CustomerOrder-Application.git
-cd CustomerOrder-Application
+https://github.com/Kumaran137/NM-SEM6.git
+cd NM-SEM6
 
