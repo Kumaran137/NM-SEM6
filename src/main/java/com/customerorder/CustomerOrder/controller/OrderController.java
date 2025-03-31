@@ -18,7 +18,16 @@ public class OrderController {
 
     @PostMapping
     public Order addOrder(@RequestBody Order order) {
-        return service.addOrder(order);
+        System.out.println("Received order: " + order);
+        Order savedOrder = service.addOrder(order);
+        System.out.println("Saved order with ID: " + savedOrder.getId());
+        return savedOrder;
+    }
+
+    @PostMapping("/bulk")
+    public List<Order> addOrders(@RequestBody List<Order> orders) {
+        System.out.println("Received orders: " + orders);
+        return service.addOrders(orders);
     }
 
     @GetMapping

@@ -1,0 +1,82 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "customerId": 1,
+      "products": [
+        {
+          "id": 101,
+          "name": "Product A",
+          "qty": 2,
+          "price": 50
+        },
+        {
+          "id": 102,
+          "name": "Product B",
+          "qty": 1,
+          "price": 30
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "customerId": 2,
+      "products": [
+        {
+          "id": 103,
+          "name": "Product C",
+          "qty": 3,
+          "price": 40
+        }
+      ]
+    },
+    {
+      "id": "944d",
+      "customerId": 1,
+      "products": [
+        {
+          "id": 0,
+          "name": "Shirt",
+          "qty": 1,
+          "price": "200"
+        },
+        {
+          "id": 0,
+          "name": "T-Shirt",
+          "qty": "2",
+          "price": "300"
+        }
+      ]
+    },
+    {
+      "id": "d40d",
+      "customerId": 1,
+      "products": [
+        {
+          "id": 0,
+          "name": "Shirt",
+          "qty": 1,
+          "price": "500"
+        },
+        {
+          "id": 0,
+          "name": "Tshirt",
+          "qty": 1,
+          "price": "500"
+        }
+      ]
+    }
+  ]
+}

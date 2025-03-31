@@ -27,6 +27,18 @@ public class CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException("Customer not found with id: " + id));
     }
 
+    public Customer updateCustomer(Long id, Customer updatedCustomer) {
+        Customer existingCustomer = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+
+        existingCustomer.setName(updatedCustomer.getName());
+        existingCustomer.setEmail(updatedCustomer.getEmail());
+
+        return repository.save(existingCustomer);
+    }
+
+
+
     public void deleteCustomer(Long id) {
         repository.deleteById(id);
     }
