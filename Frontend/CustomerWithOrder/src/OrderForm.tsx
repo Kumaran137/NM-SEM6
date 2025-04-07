@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 type Customer = {
@@ -53,21 +54,20 @@ const OrderForm: React.FC = () => {
       alert("Please select a customer and add at least one product.");
       return;
     }
-    
+
     const orders = products.map(product => ({
-      customer: { id: selectedCustomer },  // ✅ Correct format
+      customer: { id: selectedCustomer },
       productName: product.name,
       quantity: product.qty,
       price: product.price
     }));
-
-
 
     const response = await fetch(`${API_URL}/orders/bulk`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orders),
     });
+
     const result = await response.json();
 
     setOrderId(result.id);
@@ -77,33 +77,86 @@ const OrderForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Order Management</h2>
-      <h3>Select Customer</h3>
-      <select onChange={handleCustomerSelect} value={selectedCustomer || ''}>
-        <option value="">Select Customer</option>
-        {customers.map((cust) => (
-          <option key={cust.id} value={cust.id}>{cust.name}</option>
-        ))}
-      </select>
-      
-      <h3>Add Products</h3>
-      <input type="text" name="name" value={newProduct.name} onChange={handleProductChange} placeholder="Product Name" required />
-      <input type="number" name="qty" value={newProduct.qty} onChange={handleProductChange} placeholder="Quantity" required />
-      <input type="number" name="price" value={newProduct.price} onChange={handleProductChange} placeholder="Price" required />
-      <button type="button" onClick={addProduct}>Add Product</button>
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Order Management</h2>
 
-      <h3>Product List</h3>
-      <ul>
-        {products.map((prod, index) => (
-          <li key={index}>{prod.name} - Qty: {prod.qty} - Price: {prod.price} - Total: {prod.qty * prod.price}</li>
-        ))}
-      </ul>
-      
-      <h3>Overall Total: {calculateTotal()}</h3>
-      
-      <button type="button" onClick={submitOrder}>Submit Order</button>
-      {orderId && <p>Order successfully placed! Order ID: {orderId}</p>}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-1">Select Customer</label>
+        <select
+          onChange={handleCustomerSelect}
+          value={selectedCustomer || ''}
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        >
+          <option value="">Select Customer</option>
+          {customers.map((cust) => (
+            <option key={cust.id} value={cust.id}>{cust.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <h3 className="text-lg font-semibold text-gray-700 mb-2">Add Product</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <input
+          type="text"
+          name="name"
+          value={newProduct.name}
+          onChange={handleProductChange}
+          placeholder="Product Name"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        />
+        <input
+          type="number"
+          name="qty"
+          value={newProduct.qty}
+          onChange={handleProductChange}
+          placeholder="Quantity"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        />
+        <input
+          type="number"
+          name="price"
+          value={newProduct.price}
+          onChange={handleProductChange}
+          placeholder="Price"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        />
+      </div>
+      <button
+        onClick={addProduct}
+        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition font-medium mb-6"
+      >
+        Add Product
+      </button>
+
+      <h3 className="text-lg font-semibold text-gray-700 mb-2">Product List</h3>
+      {products.length === 0 ? (
+        <p className="text-sm text-gray-500">No products added yet.</p>
+      ) : (
+        <ul className="mb-4 space-y-2">
+          {products.map((prod, index) => (
+            <li key={index} className="bg-gray-50 px-4 py-3 rounded-md border border-gray-200 text-gray-700">
+              <span className="font-medium">{prod.name}</span> — Qty: {prod.qty}, Price: ₹{prod.price}, Total: ₹{prod.qty * prod.price}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mb-6 text-right font-semibold text-lg text-gray-800">
+        Total: ₹{calculateTotal()}
+      </div>
+
+      <button
+        onClick={submitOrder}
+        className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition font-semibold"
+      >
+        Submit Order
+      </button>
+
+      {orderId && (
+        <div className="mt-4 p-3 bg-green-100 text-green-800 border border-green-200 rounded-md text-center">
+          Order placed successfully! Order ID: {orderId}
+        </div>
+      )}
     </div>
   );
 };

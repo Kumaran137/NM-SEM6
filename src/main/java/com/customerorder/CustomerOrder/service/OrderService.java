@@ -27,12 +27,7 @@ public class OrderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + id));
     }
 
-    @Transactional  // Ensures proper transaction management
-    public Order addOrder(Order order) {
-        Order savedOrder = repository.save(order);  // ✅ Save and return
-        System.out.println("Saved order with ID: " + savedOrder.getId());  // ✅ Debugging
-        return savedOrder;
-    }
+
 
     @Transactional
     public List<Order> addOrders(List<Order> orders) {
